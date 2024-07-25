@@ -1,5 +1,6 @@
 package com.valentivacher.api.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -18,7 +19,40 @@ public class Biography {
     @NotBlank(message = "Veuillez saisir un numéro de telephone")
     private String phoneNumber;
 
-    @Column(nullable = false, columnDefinition="Text")
+    @Column(nullable = false, columnDefinition = "Text")
     @NotBlank(message = "Veuillez saisir une biographi")
-    private String Biography;
+    private String biography;
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBiography() {
+        return biography;
+    }
+
+    public void setBiography(String biography) {
+        this.biography = biography;
+    }
+
+    public Biography() {
+    }
+
+    public Biography(String city, String phoneNumber, String biography) {
+        this.city = city;
+        this.phoneNumber = phoneNumber;
+        this.biography = biography;
+    }
 }
