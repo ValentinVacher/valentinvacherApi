@@ -2,8 +2,12 @@ package com.valentivacher.api.controllers;
 
 import com.valentivacher.api.models.Biography;
 import com.valentivacher.api.services.BiographyService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,15 +25,20 @@ public class BiographyController {
     @Autowired
     BiographyService biographyService;
 
+    @Operation(summary = "Créer une nouvelle biographie")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Biographie créée", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Biography.class))}),
+            @ApiResponse(responseCode = "400", description = "Les données sont invalides", content = @Content),
+    })
     @io.swagger.v3.oas.annotations.parameters.RequestBody(content = @Content(examples = {
             @ExampleObject(
                     name = "Biography",
                     summary = "Biography",
                     value = """
                             {
-                            "city": "city",
-                            "phoneNumber": "phoneNumber",
-                            "biography": "biography"
+                            "city": "string",
+                            "phoneNumber": "string",
+                            "biography": "string"
                             }
                             """
             )
