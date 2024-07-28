@@ -10,6 +10,10 @@ public class BiographyService {
     @Autowired
     BiographyRepository biographyRepository;
 
+    public Biography getBiography() {
+        return biographyRepository.findFirstByOrderByIdDesc();
+    }
+
     public Biography addBiography(Biography biography) {
         return biographyRepository.save(biography);
     }
