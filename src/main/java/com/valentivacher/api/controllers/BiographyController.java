@@ -19,9 +19,16 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/biography")
 @Tag(name = "Biography")
 public class BiographyController {
-    @Autowired
-    BiographyService biographyService;
+    final BiographyService biographyService;
 
+    public BiographyController(BiographyService biographyService) {
+        this.biographyService = biographyService;
+    }
+
+    @Operation(summary = "Récupère la dernière biographie ajoutée")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Biographie trouvée", content = {@Content(mediaType = "application/json", schema = @Schema(implementation = Biography.class))}),
+    })
     @GetMapping(value = "", produces = "application/json")
     public ResponseEntity<Biography> getBiography() {
         return new ResponseEntity<>(biographyService.getBiography(), HttpStatus.OK);
