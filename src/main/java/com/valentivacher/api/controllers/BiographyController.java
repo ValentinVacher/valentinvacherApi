@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/biography")
 @Tag(name = "Biography")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BiographyController {
     final BiographyService biographyService;
 
